@@ -46,7 +46,6 @@ struct ReaderView: View {
                     navigateToSelection: navigateToSelection,
                     navigateToDestination: navigateToDestination
                 )
-                .ignoresSafeArea()
                 .onTapGesture {
                     if !searchVM.isActive {
                         withAnimation(.easeInOut(duration: 0.25)) {
@@ -68,7 +67,7 @@ struct ReaderView: View {
                 ProgressView("Opening...")
             }
         }
-        .navigationBarHidden(true)
+        .toolbar(.hidden)
         .preferredColorScheme(appearanceMode.colorScheme)
         .onChange(of: currentPageIndex) { _, newValue in
             navigateToSelection = nil

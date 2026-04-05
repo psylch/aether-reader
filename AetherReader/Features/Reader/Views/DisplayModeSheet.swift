@@ -12,9 +12,8 @@ struct DisplayModeSheet: View {
                 scrollSection
             }
             .navigationTitle("Display")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
                 }
             }

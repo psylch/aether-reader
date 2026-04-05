@@ -64,7 +64,7 @@ final class SearchViewModel {
                     forType: .highlight,
                     withProperties: nil
                 )
-                highlight.color = UIColor.yellow.withAlphaComponent(0.3)
+                highlight.color = NSColor.yellow.withAlphaComponent(0.3)
                 highlight.setValue("AetherSearchHighlight", forAnnotationKey: .contents)
                 page.addAnnotation(highlight)
             }

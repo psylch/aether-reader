@@ -4,7 +4,7 @@ import SwiftUI
 @Observable
 @MainActor
 final class ThumbnailStripViewModel {
-    var thumbnails: [Int: UIImage] = [:]
+    var thumbnails: [Int: NSImage] = [:]
     var currentPageIndex: Int = 0
 
     private let cacheService: ThumbnailCacheService

@@ -17,9 +17,8 @@ struct OutlineView: View {
                 }
             }
             .navigationTitle("Table of Contents")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
                 }
             }

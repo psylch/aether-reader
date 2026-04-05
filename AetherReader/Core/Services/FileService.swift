@@ -1,13 +1,13 @@
 import Foundation
 import PDFKit
-import UIKit
+import AppKit
 
 final class FileService: FileServiceProtocol, @unchecked Sendable {
     private let fileManager = FileManager.default
 
     private var pdfDirectory: URL {
-        let documents = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let dir = documents.appendingPathComponent("PDFs", isDirectory: true)
+        let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        let dir = appSupport.appendingPathComponent("AetherReader/PDFs", isDirectory: true)
         if !fileManager.fileExists(atPath: dir.path) {
             try? fileManager.createDirectory(at: dir, withIntermediateDirectories: true)
         }
@@ -39,7 +39,9 @@ final class FileService: FileServiceProtocol, @unchecked Sendable {
             if let firstPage = document.page(at: 0) {
                 let size = CGSize(width: 200, height: 280)
                 let image = firstPage.thumbnail(of: size, for: .cropBox)
-                thumbnailData = image.jpegData(compressionQuality: 0.7)
+                thumbnailData = image.tiffRepresentation.flatMap {
+                    NSBitmapImageRep(data: $0)?.representation(using: .jpeg, properties: [.compressionFactor: 0.7])
+                }
             }
         }
 
@@ -54,7 +56,7 @@ final class FileService: FileServiceProtocol, @unchecked Sendable {
     }
 
     func pdfURL(for storagePath: String) -> URL {
-        let documents = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documents.appendingPathComponent(storagePath)
+        let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        return appSupport.appendingPathComponent("AetherReader/\(storagePath)")
     }
 }

@@ -16,7 +16,7 @@ struct LibraryView: View {
         }
         .navigationTitle("Library")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .automatic) {
                 Button {
                     isImporting = true
                 } label: {

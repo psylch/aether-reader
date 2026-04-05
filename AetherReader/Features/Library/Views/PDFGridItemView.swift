@@ -27,8 +27,8 @@ struct PDFGridItemView: View {
 
     @ViewBuilder
     private var thumbnailView: some View {
-        if let data = record.thumbnailData, let image = UIImage(data: data) {
-            Image(uiImage: image)
+        if let data = record.thumbnailData, let nsImage = NSImage(data: data) {
+            Image(nsImage: nsImage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         } else {

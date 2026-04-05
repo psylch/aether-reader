@@ -1,7 +1,7 @@
 import SwiftUI
 @preconcurrency import PDFKit
 
-struct PDFKitView: UIViewRepresentable {
+struct PDFKitView: NSViewRepresentable {
     let document: PDFDocument?
     @Binding var currentPageIndex: Int
     @Binding var scaleFactor: CGFloat
@@ -9,12 +9,11 @@ struct PDFKitView: UIViewRepresentable {
     var navigateToSelection: PDFSelection?
     var navigateToDestination: PDFDestination?
 
-    func makeUIView(context: Context) -> PDFView {
+    func makeNSView(context: Context) -> PDFView {
         let pdfView = PDFView()
         pdfView.autoScales = true
         pdfView.displayMode = displayMode
         pdfView.displayDirection = .vertical
-        pdfView.usePageViewController(false)
         pdfView.document = document
 
         context.coordinator.pdfView = pdfView
@@ -28,7 +27,7 @@ struct PDFKitView: UIViewRepresentable {
         return pdfView
     }
 
-    func updateUIView(_ pdfView: PDFView, context: Context) {
+    func updateNSView(_ pdfView: PDFView, context: Context) {
         let coordinator = context.coordinator
         coordinator.isUpdatingFromSwiftUI = true
         defer { coordinator.isUpdatingFromSwiftUI = false }

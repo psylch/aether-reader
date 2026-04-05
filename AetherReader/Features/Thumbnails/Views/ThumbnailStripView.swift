@@ -29,21 +29,19 @@ struct ThumbnailStripView: View {
                 }
             }
             .navigationTitle("Pages")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
                 }
             }
         }
-        .presentationDetents([.medium])
     }
 
     private func thumbnailCell(for index: Int) -> some View {
         VStack(spacing: 4) {
             Group {
                 if let image = viewModel.thumbnails[index] {
-                    Image(uiImage: image)
+                    Image(nsImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 } else {

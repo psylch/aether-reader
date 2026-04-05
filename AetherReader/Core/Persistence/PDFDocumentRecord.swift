@@ -41,7 +41,7 @@ final class PDFDocumentRecord {
     }
 
     var pdfURL: URL {
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documents.appendingPathComponent(storagePath)
+        let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        return appSupport.appendingPathComponent("AetherReader/\(storagePath)")
     }
 }
