@@ -3,18 +3,16 @@ import SwiftData
 
 @main
 struct AetherReaderApp: App {
+    @State private var appState = AppState()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(appState)
         }
-        .modelContainer(for: [PDFDocumentRecord.self, Bookmark.self])
-    }
-}
-
-struct ContentView: View {
-    var body: some View {
-        NavigationStack {
-            LibraryView()
+        .modelContainer(for: [PDFDocumentModel.self, BookmarkModel.self])
+        .commands {
+            AppCommands(appState: appState)
         }
     }
 }
